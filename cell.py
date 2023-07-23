@@ -1,6 +1,7 @@
 from tkinter import Button,Label
 import random
 import settings
+import ctypes
 import sys
 class Cell:
     all = []
@@ -40,8 +41,7 @@ class Cell:
                     cell.showCell
             self.showCell()
         if Cell.cell_count == settings.minescount :
-            #when i open the pc 
-            pass    
+            ctypes.windll.user32.MessageBoxW(0,"Congratulations you have won the game " , "game over" , 0)  
         self.cellButtonObject.unbind('<Button-1>')  
         self.cellButtonObject.unbind('<Button-3>')  
 
@@ -76,6 +76,9 @@ class Cell:
                 Cell.cellCountLabel.configure(
                     text=f"Cell left :{Cell.cell_count}"
                 )
+        self.cellButtonObject.configure(
+            bg="SystemButtonFace" , 
+        )        
         self.isOpened = True        
 
     def get_cell_by_axis(self, x, y):
@@ -85,6 +88,7 @@ class Cell:
 
     def showMine(self):
         self.cellButtonObject.configure(bg="red")
+        ctypes.windll.user32.MessageBoxW(0,"You have clicked on a Mine" , "game over" , 0)
         sys.exit()
 
 
